@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery.js"></script>
+  <title>Register</title>
+</head>
+<style>
+  .col_success{
+    color:green
+  }
+  .col_error{
+    color:red
+  }
+
+</style>
+<script>
+  const fn = (e)=>{
+   
+    e.preventDefault();
+    
+    // alert('Hello world');
+  
+    
+    $.ajax({
+      type: "post",
+      url: "/checkusername",
+      data: {'username':$('#username').val()},
+      // dataType: "dataType",
+      success: function (response) {
+     
+
+      if(response.available == 'yes'){
+        $('#msg').html("<span class = 'col_success'>User name is available</span>");
+      }
+      else{
+        $('#msg').html("<span class = 'col_error'>User name is not available, please choose a different name</span> ");
+      }
+      }
+    });
+  }
+  const cc = ()=>{
+   
+   
+  }
+</script>
+<body>
+  <div>
+    <h1 onclick="cc()">
+      Register a new account
+    </h1>
+    <form id  = 'resform' action="" onsubmit="fn(event)">
+      <p>
+        Username
+        <input id = 'username' type="text" placeholder="Username"/>
+        <span id = 'msg'></span>
+      </p>
+
+      <p>
+        Password
+        <input type="text" placeholder="Password"/>
+      </p>
+
+      <p>
+        Password again
+        <input type="text" placeholder="Username"/>
+      </p>
+
+      <input type="submit"></input>
+
+    </form>
+  </div>
+</body>
+</html>
